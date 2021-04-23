@@ -1,0 +1,91 @@
+@startuml
+title "Fit ohne Geräte" Begleitapp - Anwendungsfalldiagramm
+left to right direction
+
+actor User
+
+rectangle System {
+
+    package "Training" {
+        package "Trainingskontrolle" {
+            usecase uc_do_training as "Ich als User
+            möchte in der Lage sein,
+            eine Trainingseinheit
+            zu absolvieren"
+            usecase uc_stop as "Ich als User
+            möchte in der Lage sein,
+            eine Trainingseinheit
+            zu beenden"
+            usecase uc_start as "Ich als User
+            möghcte in der Lage sein,
+            eine Trainingseinheit
+            zu starten"
+
+            package Timer  {
+                usecase "Timer nutzen" as uc_timer
+                usecase "Timer starten" as uc_timer_start
+                usecase "Timer stoppen" as uc_timer_stop
+            }
+        }
+
+        package "Programm Auswahl" {
+            usecase uc_program as "Das Programm auswählen,
+            was gestartet werden soll"
+            usecase "Programm" as uc_program_difficulty
+            usecase "Woche" as uc_program_week
+            usecase "Tag" as uc_program_day
+        }
+
+        package "Programm Erstellung" {
+            usecase uc_program_creation as "Ich als User möchte
+            in der Lage sein,
+            eigene Programme mit
+            den vorhandenen Übungen
+            zusammenstellen zu können"
+            usecase uc_training_creation as "Trainingseinheiten
+            zusammenstellen"
+        }
+    }
+
+    package Fortschritt {
+        usecase uc_progress as "Ich als User
+        möchte in der Lage sein,
+        mir meinen Fortschritt
+        anzuzeigen"
+        note right
+            Die Daten für den Fortschritt bleiben
+            auf dem Gerät des Users lokal ge-
+            speichert und werden nicht mit
+            dem Internet synchronisiert.
+        end note
+        usecase "Programm" as uc_progress_program
+        usecase "Woche" as uc_progress_week
+        usecase "Tag" as uc_progress_day
+    }
+
+    package Übungen {
+        usecase uc_exercise_description as "Beschreibung für
+        die Übung anzeigen"
+    }
+
+    uc_program --> uc_program_day #line.dashed : //<<include>>//
+    uc_program --> uc_program_difficulty #line.dashed : //<<include>>//
+    uc_program --> uc_program_week #line.dashed : //<<include>>//
+    uc_progress --> uc_progress_day #line.dashed : //<<include>>//
+    uc_progress --> uc_progress_week #line.dashed : //<<include>>//
+    uc_progress --> uc_progress_program #line.dashed : //<<include>>//
+    uc_do_training --> uc_timer #line.dashed : //<<include>>//
+    uc_program_creation --> uc_training_creation #line.dashed : //<<include>>//
+    uc_timer <|-- uc_timer_start: //<<extends>>//
+    uc_timer <|-- uc_timer_stop: //<<extends>>//
+}
+
+User --> uc_program
+User --> uc_progress
+User --> uc_start
+User --> uc_stop
+User --> uc_do_training
+User --> uc_exercise_description
+User --> uc_program_creation
+
+@enduml
