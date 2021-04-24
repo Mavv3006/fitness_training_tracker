@@ -1,0 +1,42 @@
+@startuml
+title "Klassendiagramm"
+
+rectangle System {
+
+    package Training {
+        package "Programm Auswahl" {
+            class Programm {
+                + List<Übungen> übungen
+            }
+        }
+
+        package Trainingskontrolle {
+            class Training {
+                + start(Programm): void
+                + stop(): void
+            }
+
+            package Timer {
+                interface Timer {}
+                class CountdownTimer implements Timer {}
+            }
+        }
+
+        package "Programm Erstellung" {}
+    }
+
+    package Fortschritt {}
+
+    package Übungen {
+        class Übung {
+            + getDiscription(): String
+        }
+    }
+}
+
+
+Training --> Timer
+Training --> Programm
+Programm "1..*" *-- "1..*" Übung
+
+@enduml
