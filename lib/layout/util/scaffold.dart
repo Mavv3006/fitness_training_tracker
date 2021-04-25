@@ -5,10 +5,15 @@ class TrainingScaffold extends StatelessWidget {
   final String title;
   Widget? body;
   Widget? floatingActionButton;
+  Color? backgroundColor;
 
-  TrainingScaffold(
-      {Key? key, required this.title, this.body, this.floatingActionButton})
-      : super(key: key);
+  TrainingScaffold({
+    Key? key,
+    required this.title,
+    this.body,
+    this.floatingActionButton,
+    this.backgroundColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +23,7 @@ class TrainingScaffold extends StatelessWidget {
       ),
       drawer: TrainingDrawer(),
       body: this.body,
+      backgroundColor: backgroundColor,
       floatingActionButton: this.floatingActionButton,
     );
   }

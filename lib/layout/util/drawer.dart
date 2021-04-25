@@ -66,6 +66,15 @@ class TrainingDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
+            leading: Icon(Icons.list),
+            title: Text("Program List"),
+            onTap: navigate(
+              context,
+              currentRoute,
+              TrainingRoutes.PROGRAM_LIST,
+            ),
+          ),
+          ListTile(
             leading: Icon(Icons.fitness_center),
             title: Text("Exercise List"),
             onTap: navigate(

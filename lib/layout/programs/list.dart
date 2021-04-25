@@ -1,22 +1,18 @@
 import 'package:fitness_training_tracker/layout/util/scaffold.dart';
-import 'package:fitness_training_tracker/logic/exercises/exercise.dart';
+import 'package:fitness_training_tracker/logic/program/program.dart';
 import 'package:flutter/material.dart';
 
-class ExercisesListPage extends StatelessWidget {
+class ProgramListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color primaryVariantColor = Theme.of(context).colorScheme.primaryVariant;
-    List<Exercise> list = Exercise.getImpelemented();
+    List<Program> list = Program.getImplemented();
 
     return TrainingScaffold(
       backgroundColor: primaryVariantColor,
-      title: "Exercises List",
+      title: "Program List Page",
       body: ListView.separated(
-        itemCount: list.length,
         padding: const EdgeInsets.only(top: 10, bottom: 10),
-        separatorBuilder: (context, index) {
-          return Divider(color: primaryVariantColor);
-        },
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(list[index].getName()),
@@ -24,6 +20,10 @@ class ExercisesListPage extends StatelessWidget {
             onTap: () {},
           );
         },
+        separatorBuilder: (context, index) {
+          return Divider(color: primaryVariantColor);
+        },
+        itemCount: list.length,
       ),
     );
   }

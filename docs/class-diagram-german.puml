@@ -2,18 +2,29 @@
 title "Klassendiagramm"
 
 rectangle System {
-
     package Training {
         package "Programm Auswahl" {
-            class Programm {
+            class Program {
+                + List<TrainingsDay> days
+            }
+
+            class TrainingsDay {
                 + List<Übungen> übungen
+            }
+
+            class AvailablePrograms {
+                + List<Program> programms
+                + select(int index): Program
             }
         }
 
         package Trainingskontrolle {
             class Training {
-                + start(Programm): void
+                - Program program
+                + start(): void
                 + stop(): void
+                + setProgram(Program): void
+                + startNextExercise(): void
             }
 
             package Timer {
@@ -22,10 +33,10 @@ rectangle System {
             }
         }
 
-        package "Programm Erstellung" {}
+        ' package "Programm Erstellung" {}
     }
 
-    package Fortschritt {}
+    ' package Fortschritt {}
 
     package Übungen {
         class Übung {
@@ -36,7 +47,9 @@ rectangle System {
 
 
 Training --> Timer
-Training --> Programm
-Programm "1..*" *-- "1..*" Übung
+Training -> AvailablePrograms
+AvailablePrograms *- Program
+TrainingsDay *-- Übung
+Program *- TrainingsDay
 
 @enduml
