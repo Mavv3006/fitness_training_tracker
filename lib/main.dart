@@ -1,10 +1,17 @@
-import 'package:fitness_training_tracker/layout/exercises/list.dart';
 import 'package:fitness_training_tracker/layout/home/home.dart';
-import 'package:fitness_training_tracker/layout/progress/progress.dart';
 import 'package:fitness_training_tracker/util/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-void main() {
+Future<void> main() async {
+  // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  //     FlutterLocalNotificationsPlugin();
+  // const AndroidInitializationSettings androidSettings =
+  //     AndroidInitializationSettings('ic_launcher');
+  // InitializationSettings settings =
+  //     InitializationSettings(android: androidSettings);
+  // await flutterLocalNotificationsPlugin.initialize(settings);
+
   runApp(MyApp());
 }
 

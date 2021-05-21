@@ -20,10 +20,23 @@ class _TimerViewState extends State<TimerView> with TickerProviderStateMixin {
       vsync: this,
       duration: widget.duration,
     );
+    controller!.addStatusListener(animationDismissedCallBack);
+  }
+
+  void animationDismissedCallBack(AnimationStatus status) {
+    if (status == AnimationStatus.dismissed) {
+      // TODO: dispatch notification
+      print("finished");
+    }
   }
 
   String get timerString {
-    Duration duration = controller!.duration! * controller!.value;
+    Duration duration = controller!.duration!;
+
+    if (!controller!.isDismissed) {
+      duration *= controller!.value;
+    }
+
     return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
